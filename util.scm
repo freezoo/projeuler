@@ -15,3 +15,18 @@
           (cons (car lst) (filter fn (cdr lst)))
           (filter fn (cdr lst)))))
 
+(define (prime? n)
+  (define (iter n i)
+    (if (= n i)
+        #t
+        (if (= 0 (remainder n i))
+            #f
+            (iter n (+ 1 i)))))
+  (if (< n 3)
+      #t
+      (iter n 2)))
+
+(define (reduce fn accum lst)
+  (if (null? lst)
+      accum
+      (reduce fn (fn accum (car lst)) (cdr lst))))
